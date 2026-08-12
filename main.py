@@ -23,13 +23,14 @@ def split_subject_and_body(email_text: str):
 def main():
     sender_email = input("Enter your Gmail address: ")
     sender_app_password = getpass("Enter your Gmail App Password: ")
-
+    subject=input("Enter the Subject")
     short_description = input("Enter short description about the email: ")
     email_length = input("Enter email length (Short/Long): ")
     contact_details = input("Enter your contact details: ")
 
     email_text = generate_email(
         sender_email=sender_email,
+        
         short_description=short_description,
         email_length=email_length,
         contact_details=contact_details
