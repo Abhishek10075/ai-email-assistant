@@ -276,12 +276,17 @@ with right:
 
                 try:
 
+                    all_attachments = (
+                        (uploaded_files or []) + (uploaded_images or [])
+                    )
+
                     send_email(
                         sender_email,
                         sender_app_password,
                         recipient,
                         subject,
-                        st.session_state["email_body"]
+                        st.session_state["email_body"],
+                        attachments=all_attachments
                     )
 
                     st.success(
@@ -293,6 +298,7 @@ with right:
                     st.error(
                         f"Failed to send email: {e}"
                     )
+
 
 # --------------------------------------------------
 # Footer
