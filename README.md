@@ -42,8 +42,11 @@ SmartMail-AI/
 └── services/
     ├── email_generator.py
     └── email_sender.py
+```
 
-🔄 Application Flow
+## 🔄 Application Flow
+
+```text
 User enters recipient email
         ↓
 User enters subject
@@ -59,114 +62,160 @@ Mistral AI generates professional email
 User previews and edits email
         ↓
 Email + attachments are sent using Gmail SMTP
+```
+
+## 📋 Requirements
+
+Make sure Python is installed on your system.
+
+Recommended Python version:
+
+Python 3.10+
 
 
-📦 Installation
-1. Clone the repository
+## 📦 Installation
+
+**1. Clone the repository**
+
+```bash
 git clone https://github.com/your-username/SmartMail-AI.git
-2. Open the project folder
-cd SmartMail-AI
-3. Create a virtual environment
-python -m venv venv
-4. Activate the virtual environment
-Windows
-venv\Scripts\activate
-macOS/Linux
-source venv/bin/activate
-5. Install dependencies
-pip install -r requirements.txt
-🔐 Environment Variables
+```
 
-Create a .env file in the root directory of the project.
+**2. Open the project folder**
+
+```bash
+cd SmartMail-AI
+```
+
+**3. Create a virtual environment**
+
+```bash
+python -m venv venv
+```
+
+**4. Activate the virtual environment**
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+macOS/Linux:
+
+```bash
+source venv/bin/activate
+```
+
+**5. Install dependencies**
+
+```bash
+pip install -r requirements.txt
+```
+
+## 🔐 Environment Variables
+
+Create a `.env` file in the root directory of the project.
 
 Add the following variables:
 
+```env
 MISTRAL_API_KEY=your_mistral_api_key
 EMAIL_ADDRESS=your_gmail_address
 EMAIL_APP_PASSWORD=your_gmail_app_password
-Important
+```
 
-Do not upload your .env file to GitHub.
+**Important**
 
-Add .env to your .gitignore file:
+Do not upload your `.env` file to GitHub.
+
+Add `.env` to your `.gitignore` file:
 
 .env
 venv/
-__pycache__/
+pycache/
 *.pyc
-🔑 Gmail App Password
+
+
+## 🔑 Gmail App Password
 
 To send emails through Gmail SMTP, you need a Gmail App Password.
 
 The application uses:
 
-SMTP Server: smtp.gmail.com
-SMTP Port: 587
+- **SMTP Server:** smtp.gmail.com
+- **SMTP Port:** 587
 
 The email service uses TLS and Gmail authentication before sending the email.
 
-🤖 Mistral AI
+## 🤖 Mistral AI
 
 SmartMail AI uses the Mistral model:
 
 mistral-small-latest
 
-The Mistral API key is loaded securely from the .env file.
+
+The Mistral API key is loaded securely from the `.env` file.
 
 The AI generates the email body using:
 
-Email subject
-Short description
-Contact details
+- Email subject
+- Short description
+- Contact details
 
 The generated email includes a professional greeting, properly structured body, closing phrase, and contact details when provided.
 
-📎 Supported Attachments
-Files
+## 📎 Supported Attachments
+
+**Files**
 
 The application supports:
 
-PDF
-DOC
-DOCX
-TXT
-CSV
-XLSX
-PPT
-PPTX
-Images
+- PDF
+- DOC
+- DOCX
+- TXT
+- CSV
+- XLSX
+- PPT
+- PPTX
+
+**Images**
 
 The application supports:
 
-PNG
-JPG
-JPEG
-WEBP
+- PNG
+- JPG
+- JPEG
+- WEBP
 
 Multiple files and images can be selected and attached to the email.
 
-▶️ Run the Application
+## ▶️ Run the Application
 
 Start the Streamlit application using:
 
+```bash
 streamlit run app.py
+```
 
 The application will open in your browser.
 
-🖥️ How to Use
-Step 1
+## 🖥️ How to Use
+
+**Step 1**
 
 Enter the recipient's email address.
 
-Step 2
+**Step 2**
 
 Enter the email subject.
 
-Step 3
+**Step 3**
 
 Describe what you want to write in the email.
 
-Step 4
+**Step 4**
 
 Add contact details if required.
 
@@ -175,60 +224,71 @@ Example:
 Abhishek Nishad
 +91 XXXXX XXXXX
 your@email.com
-Step 5
+
+
+**Step 5**
 
 Upload files or images if required.
 
-Step 6
+**Step 6**
 
 Click:
 
 ✨ Generate Email
-Step 7
+
+
+**Step 7**
 
 Review and edit the generated email.
 
-Step 8
+**Step 8**
 
 Click:
 
 🚀 Send Email
 
+
 The email will be sent to the specified recipient.
 
-🧩 Main Components
-app.py
+## 🧩 Main Components
+
+**app.py**
 
 The main Streamlit application.
 
 It handles:
 
-User interface
-Email input
-Subject input
-Description input
-Contact details
-File uploads
-Image uploads
-Email preview
-Email sending
-services/email_generator.py
+- User interface
+- Email input
+- Subject input
+- Description input
+- Contact details
+- File uploads
+- Image uploads
+- Email preview
+- Email sending
+
+**services/email_generator.py**
 
 Responsible for AI-based email generation using Mistral AI and LangChain.
 
 Main function:
 
+```python
 generate_email(
     subject,
     short_description,
     contact_details
 )
-services/email_sender.py
+```
+
+**services/email_sender.py**
 
 Responsible for sending emails using Gmail SMTP.
 
 Main function:
 
+```python
 send_email(
     sender_email,
     sender_app_password,
@@ -237,24 +297,26 @@ send_email(
     body,
     attachments
 )
-🔒 Security
+```
 
-Sensitive credentials should always be stored in .env.
+## 🔒 Security
+
+Sensitive credentials should always be stored in `.env`.
 
 Never commit the following information to GitHub:
 
-MISTRAL_API_KEY
-EMAIL_ADDRESS
-EMAIL_APP_PASSWORD
+- MISTRAL_API_KEY
+- EMAIL_ADDRESS
+- EMAIL_APP_PASSWORD
 
-Make sure .env is included in .gitignore.
+Make sure `.env` is included in `.gitignore`.
 
-📄 License
+## 📄 License
 
 This project is created for learning and development purposes.
 
-👨‍💻 Author
+## 👨‍💻 Author
 
-Abhishek Nishad
+**Abhishek Nishad**
 
 AI/ML | Python | Generative AI | NLP
