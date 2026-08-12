@@ -1,4 +1,5 @@
 <img width="949" height="431" alt="image" src="https://github.com/user-attachments/assets/6b1a06b8-b665-44ea-87fe-26a7b54d1865" />
+
 # ✉️ SmartMail AI
 
 SmartMail AI is an AI-powered email assistant built with **Streamlit**. It uses **Mistral AI** to generate professional email content and **Gmail SMTP** to send emails with optional file and image attachments.
@@ -41,6 +42,7 @@ SmartMail-AI/
 └── services/
     ├── email_generator.py
     └── email_sender.py
+
 🔄 Application Flow
 User enters recipient email
         ↓
@@ -57,13 +59,8 @@ Mistral AI generates professional email
 User previews and edits email
         ↓
 Email + attachments are sent using Gmail SMTP
-📋 Requirements
 
-Make sure Python is installed on your system.
 
-Recommended Python version:
-
-Python 3.10+
 📦 Installation
 1. Clone the repository
 git clone https://github.com/your-username/SmartMail-AI.git
