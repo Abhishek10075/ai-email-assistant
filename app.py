@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 from dotenv import load_dotenv
+import re
 
 from services.email_generator import generate_email
 from services.email_sender import send_email
@@ -10,6 +11,12 @@ load_dotenv()
 # --------------------------------------------------
 # Page Configuration
 # --------------------------------------------------
+
+def is_valid_email(email: str) -> bool:
+    """Basic email format validation."""
+    pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+    return re.match(pattern, email) is not None
+
 
 st.set_page_config(
     page_title="SmartMail AI",
@@ -117,6 +124,14 @@ with left:
         "Recipient Email",
         placeholder="example@gmail.com"
     )
+
+    if recipient:
+        if is_valid_email(recipient):
+            st.success("Valid email address ✅")
+        else:
+            st.error("Please enter a valid email address ❌")
+
+    
 
     subject = st.text_input(
         "Subject",
