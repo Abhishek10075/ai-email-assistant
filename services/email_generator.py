@@ -3,29 +3,23 @@
 import os
 
 from dotenv import load_dotenv
-from langchain_mistralai import ChatMistralAI
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
+from google import genai
 
 
 # Load environment variables
 load_dotenv()
 
 
-def get_llm():
-    """Create and return the Mistral AI model."""
-    return ChatMistralAI(
-        model="mistral-small-latest",
-        mistral_api_key=os.getenv("MISTRAL_API_KEY")
-    )
+def get_client():
+    """Create and return the Gemini API client."""
+    return genai.Client(api_key=os.getenv("GEMINIAI_API_KEY"))
 
 
 # --------------------------------------------------
 # Prompt Template
 # --------------------------------------------------
 
-email_prompt = ChatPromptTemplate.from_template(
-    """
+EMAIL_PROMPT_TEMPLATE = """
 You are a professional email writing assistant.
 
 Your task is to write a professional and natural email body
@@ -70,19 +64,6 @@ Best regards,
 <contact detail line 2>
 <contact detail line 3>
 """
-)
-# --------------------------------------------------
-# Output Parser
-# --------------------------------------------------
-
-output_parser = StrOutputParser()
-
-
-# --------------------------------------------------
-# Create Chain
-# --------------------------------------------------
-
-email_chain = email_prompt | get_llm() | output_parser
 
 
 # --------------------------------------------------
@@ -95,7 +76,7 @@ def generate_email(
     contact_details: str
 ) -> str:
     """
-    Generate a professional email body using Mistral AI.
+    Generate a professional email body using Gemini AI.
 
     Args:
         subject: The email subject line, provided by the user.
@@ -106,12 +87,20 @@ def generate_email(
         Generated email body as a string.
     """
 
-    result = email_chain.invoke(
-        {
-            "subject": subject,
-            "short_description": short_description,
-            "contact_details": contact_details
-        }
+    client = get_client()
+
+    prompt = EMAIL_PROMPT_TEMPLATE.format(
+        subject=subject,
+        short_description=short_description,
+        contact_details=contact_details
     )
 
-    return result
+    try:
+        response = client.models.generate_content(
+            model="gemini-3.6-flash",
+            contents=prompt
+        )
+        return response.text
+
+    except Exception as e:
+        raise RuntimeError(f"Gemini email generation failed: {e}")
